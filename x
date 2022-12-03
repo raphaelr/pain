@@ -16,5 +16,5 @@ sed -i "
 	s/ref: .*/ref: $branch/
 	s/-A .*/-A $attr/
 " .github/workflows/x.yml
-git commit -a x
+git commit -a -m x --allow-empty
 git push origin x

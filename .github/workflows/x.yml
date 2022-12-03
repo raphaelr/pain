@@ -7,6 +7,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: raphaelr/nixpkgs
-          ref: hello
+          ref: gnvim
       - uses: cachix/install-nix-action@v17
-      - run: nix-build -A hello
+      - run: nix-build -A gnvim
