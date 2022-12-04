@@ -13,8 +13,8 @@ if [ -z "$branch" ]; then
 fi
 
 sed -i "
-	s/ref: .*/ref: $branch/
-	s/-A .*/-A $attr/
+	s~ref: .*~ref: $branch~
+	s~-A .*~-A $attr~
 " .github/workflows/x.yml
-git commit -a -m x --allow-empty
-git push origin x
+git commit -a -m x --amend --allow-empty
+git push origin x -f

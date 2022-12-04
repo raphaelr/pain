@@ -3,10 +3,18 @@ on: push
 jobs:
   x:
     runs-on: macos-latest
+    #runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
         with:
           repository: raphaelr/nixpkgs
-          ref: gnvim
+          ref: fix/sdl-config
       - uses: cachix/install-nix-action@v17
-      - run: nix-build -A gnvim
+        with:
+          extra_nix_config: |
+            sandbox = true
+      - run: |
+          set -x
+          nix-instantiate --eval -E builtins.currentSystem
+          cat /etc/nix/nix.conf
+      - run: nix-build --keep-going -A agg

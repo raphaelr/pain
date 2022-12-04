@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+tmpfile="$(mktemp)"
+trap 'rm -f "$tmpfile"' EXIT
+
+here="$(dirname "$0")"
+file="$here/.github/workflows/x.yml"
+
+cp -f "$file" "$tmpfile"
+$EDITOR "$tmpfile"
+if [ -s "$tmpfile" ]; then
+	cd "$here"
+	cp -f "$tmpfile" "$file"
+	git commit -a -m x --amend --allow-empty
+	git push origin x -f
+else
+	echo "Empty file, aborting"
+fi
