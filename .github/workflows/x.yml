@@ -3,10 +3,11 @@ on: push
 jobs:
   x:
     runs-on: macos-latest
+    #runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
         with:
           repository: raphaelr/nixpkgs
-          ref: gnvim
+          ref: pain
       - uses: cachix/install-nix-action@v17
-      - run: nix-build -A gnvim
+      - run: nix-build --keep-going -A obs-studio-plugins.droidcam-obs
